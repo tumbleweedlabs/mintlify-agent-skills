@@ -10,7 +10,7 @@ Five principles, in priority order:
 2. **Patch-ready proposals, never silent rewrites.** Every skill outputs diffs and skeletons that a human (or another agent) can apply with a single PR. Skills do not "just go fix it."
 3. **Live docs over training data.** Every skill defers to https://mintlify.com/docs and the schema at https://mintlify.com/docs.json. If the live docs and training data disagree, the live docs win.
 4. **Composable but bounded.** Each skill has a sharp scope and an explicit "When NOT to use." A skill that drifts into a sibling's territory is a bug.
-5. **Lean context.** The router is always loaded; companions load on demand. No session pulls more than ~30KB of skill content; the suite total stays under ~70KB.
+5. **Lean enough context.** The router is always loaded; companions load on demand. A typical session loads the router plus one companion (~28–38KB); a bootstrap session loads two companions plus the router (~57KB). The suite total at v1.0.0 is ~97KB across five `SKILL.md` files plus six pattern templates of ~5–6KB each — bigger than the original speculative budget, smaller than loading every relevant Mintlify doc into context. The size came from depth: explicit hand-offs between siblings, MCP integration sections, and verification checklists. See [`README.md` → Loading model](./README.md#loading-model) for actual per-session numbers.
 
 ## The router pattern
 
@@ -62,7 +62,7 @@ Do *not* vendor:
 
 - **Live Mintlify docs** at https://mintlify.com/docs — every skill defers to the live source. Reproducing them locally would rot.
 - **`docs.json` schema** at https://mintlify.com/docs.json — referenced as the authoritative schema; never copied.
-- **Mintlify MCP server** at https://mintlify.com/docs/mcp — pointed at, never inlined. The router references it; `create` may include optional install steps.
+- **Mintlify MCP server** at https://mcp.mintlify.com (docs at https://mintlify.com/docs/ai/mintlify-mcp) — pointed at, never inlined. `router/SKILL.md` references it; `create/SKILL.md` documents per-harness install. `write/SKILL.md` and `design/SKILL.md` map their workflow phases to the MCP's `toolkit` (`explore` / `editContent` / `editNavigation` / `editConfig` / `ship`) so an MCP-equipped agent can `checkout`, propose changes, and `save` (open a PR) without leaving the skill workflow.
 
 When upstream `mintlify` updates its writing standards, re-vendor (with a clear "vendored from {commit} on {date}" note in `write/SKILL.md`) rather than silently drift.
 
@@ -72,19 +72,19 @@ Two extension points, in order of frequency:
 
 ### Adding a pattern
 
-1. Copy an existing template in `patterns/` as a starting point.
-2. Fill the standard sections defined in [`patterns/README.md`](./patterns/README.md): *Audience*, *Primary navigation*, *Starting groups*, *Component conventions*, *OpenAPI integration* (if applicable), *Common mistakes*.
-3. Submit a PR with a one-paragraph justification: which existing site it's modeled after, and why a generic skill couldn't already handle it.
+Process and bar live in [`CONTRIBUTING.md` → Adding a pattern](./CONTRIBUTING.md#adding-a-pattern). The pattern contract — the eight sections every template must fill — is in [`patterns/README.md`](./patterns/README.md).
 
-A pattern that turns out to be a generic principle should be promoted into a skill instead — `CONTRIBUTING.md` describes the bar.
+A pattern that turns out to be a generic principle should be promoted into a skill instead. The bar for that promotion is also in `CONTRIBUTING.md`.
 
 ### Adding a sibling skill
 
-A sixth or seventh skill is justified only when the new lifecycle phase doesn't fit cleanly into any existing one *and* would routinely demand more than ~10KB of guidance. Candidates considered and deferred:
+A sixth or seventh skill is justified only when the new lifecycle phase doesn't fit cleanly into any existing one *and* would routinely demand more than ~10KB of guidance. Process and bar live in [`CONTRIBUTING.md` → Adding a sibling skill](./CONTRIBUTING.md#adding-a-sibling-skill).
 
-- **`mintlify-api`** — wrapping the Mintlify REST API (auth, deployment triggers, metadata). Upstream has a 43-line stub. Referenced but not yet wrapped. Revisit in v1.1.0 if there's demand.
+Candidates considered and deferred:
+
+- **`mintlify-api`** — wrapping the Mintlify REST API (auth, deployment triggers, metadata). Upstream has a 43-line stub at `skills/mintlify-api/SKILL.md` in `github.com/mintlify/docs`. Referenced but not yet wrapped. Revisit if there's demand.
 - **`visuals`** — diagram and infographic generation. Currently absorbed into `design`'s component matrix (`<Mermaid>`, `<Frame>`, `<Tree>`).
-- **`learning`** — module structure with prerequisites. Currently a pattern (`patterns/learning-site.md`).
+- **`learning`** — module structure with prerequisites and reading order. Currently a pattern (`patterns/learning-site.md`).
 
 When considering a new skill, the first question is: *can this be a pattern instead?* Patterns are cheaper, easier to author, and keep the core surface generic.
 

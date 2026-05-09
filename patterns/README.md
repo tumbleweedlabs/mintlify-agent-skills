@@ -6,7 +6,7 @@ This directory exists so that site-type variation (API docs vs. SaaS product doc
 
 ## Initial templates
 
-These are added in section 9 step 8 of the build, after the four companion skills are drafted. This README is the contract they conform to.
+The six initial templates ship with v1.0.0. This README is the contract they conform to; new patterns must follow the same shape.
 
 | Pattern                        | One-liner                                                              |
 |--------------------------------|------------------------------------------------------------------------|
