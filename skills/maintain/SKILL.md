@@ -20,7 +20,7 @@ compatibility:
     - Write access (to a feature branch) for opening maintenance PRs
 metadata:
   author: tumbleweedlabs
-  version: "1.1.0"
+  version: "1.1.1"
   suite: mintlify-agent-skills
   authoritative_docs: https://mintlify.com/docs
   cli_reference: https://mintlify.com/docs/cli/commands
@@ -116,6 +116,30 @@ Run, in order, scoped to whichever the user asked for. For each command:
 Notes:
 - `mint openapi-check` is **deprecated**. Use `mint validate`.
 - If a command isn't recognized, the CLI may have moved on. Run `mint --help` and consult https://mintlify.com/docs/cli/commands before improvising. Do **not** invent flags.
+
+#### Agent skill discovery check (optional, only for agent-consumable products)
+
+Mintlify auto-generates and hosts a `skill.md` for every public site (see https://www.mintlify.com/docs/ai/skillmd). For sites that document an API or product an **agent** is meant to consume, the skill discovery file is load-bearing — agents reading it before calling into stale capability descriptions is a real failure mode. For sites that exist for human readers only (content, learning, wiki, resource library), this check is **skip**.
+
+If applicable, fetch the discovery endpoints and verify accuracy:
+
+```bash
+SITE="https://<your-mintlify-host>"
+curl -s "$SITE/.well-known/agent-skills/" | jq .   # recommended; agent-skills 0.2.0 spec, includes sha256 digests
+curl -s "$SITE/.well-known/skills/"                # legacy format; both are served
+curl -s "$SITE/skill.md"                           # the file itself
+```
+
+**What to verify:**
+
+- The capabilities, inputs, and limits listed match the API the docs currently describe. Drift here surfaces as agents calling into wrong endpoint shapes — high priority.
+- For custom-overridden files (`skill.md` at repo root, or `.mintlify/skills/<category>/SKILL.md`): does `metadata.version` reflect the latest API version the docs describe?
+- For auto-generated content: spot-check 2–3 capability entries against the actual product. If wrong, plan an override (hand off to `create` for the override scaffolding).
+- The SHA-256 digest in the agent-skills response matches a fresh hash of `skill.md`. Mismatch implies stale CDN cache or inconsistent deploy — flag for ops.
+
+**Update lag:** Mintlify's auto-generator can take **up to 24 hours** to refresh after a deployment. Drift detected within 24 hours of a deploy is normal. Drift past 24 hours is a real maintenance issue and belongs in the PR.
+
+**If the site is on a custom reverse proxy or `/docs` subpath:** verify the proxy forwards `/skill.md`, `/.well-known/skills/*`, and `/.well-known/agent-skills/*`. Missing forwarding = agents fail discovery silently.
 
 ### Phase 3 — Configure (or audit) CI link checks
 

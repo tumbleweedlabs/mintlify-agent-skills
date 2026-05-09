@@ -104,7 +104,11 @@ OAuth login completes on first call. The MCP edits your docs — treat the insta
 
 ## Status
 
-**v1.1.0** — packaged as a Claude plugin (`.claude-plugin/plugin.json` + `skills/<name>/SKILL.md`). Installable via `/plugin install` in Claude Code and Cowork. v1.0.0 was the initial public release with the same content under a flat `<skill>/SKILL.md` layout. Versioning is [semver](https://semver.org); see [`CONTRIBUTING.md → Versioning`](./CONTRIBUTING.md#versioning) for the per-skill version policy.
+**v1.1.1** — `create` and `maintain` now cover Mintlify's auto-generated [`skill.md` discovery feature](https://www.mintlify.com/docs/ai/skillmd) (served at `/.well-known/agent-skills/` with SHA-256 integrity digests, plus the legacy `/.well-known/skills/`). `create` documents when to override the auto-generation; `maintain` adds an optional discovery-endpoint check for sites that document agent-consumable products.
+
+**v1.1.0** — packaged as a Claude plugin (`.claude-plugin/plugin.json` + `skills/<name>/SKILL.md`). Installable via `/plugin install` in Claude Code and Cowork. v1.0.0 was the initial public release with the same content under a flat `<skill>/SKILL.md` layout.
+
+Versioning is [semver](https://semver.org); see [`CONTRIBUTING.md → Versioning`](./CONTRIBUTING.md#versioning) for the per-skill version policy.
 
 ## License
 

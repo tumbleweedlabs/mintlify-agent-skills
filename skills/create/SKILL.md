@@ -21,7 +21,7 @@ compatibility:
     - Network access to https://mintlify.com/docs and the npm registry
 metadata:
   author: tumbleweedlabs
-  version: "1.1.0"
+  version: "1.1.1"
   suite: mintlify-agent-skills
   authoritative_docs: https://mintlify.com/docs
   cli_install_reference: https://mintlify.com/docs/cli/install
@@ -201,6 +201,34 @@ node_modules/
 ```
 
 Optional `custom.css` skeleton — only if the user has explicitly asked to override the theme's CSS. Otherwise omit; theming should run through `docs.json` `colors` and the `theme` field first. If you do scaffold one, leave it empty with a comment pointing to the theme's CSS variables.
+
+#### Agent skill discovery (`skill.md`)
+
+Mintlify auto-generates a `skill.md` for every public site and serves it at:
+
+- `/.well-known/agent-skills/` — recommended; follows the [agent-skills 0.2.0 spec](https://www.mintlify.com/docs/ai/skillmd) with SHA-256 integrity digests per entry.
+- `/.well-known/skills/` — legacy format; both endpoints are served.
+- `/skill.md` — the file itself.
+
+Auto-generation runs after deployment and can take **up to 24 hours** to refresh.
+
+**Don't scaffold a `skill.md` proactively.** Let Mintlify generate one first, then override only if needed.
+
+**When to override** (rare for most sites):
+- The site documents an **agent-consumable API or product surface**, and the auto-generated capability framing misses parameters, return shapes, or guardrails the agent must know.
+- The product team needs a deterministic, human-edited capability declaration for compliance or third-party integration reasons.
+
+**When NOT to override:** pure content / learning / link-library / wiki sites. The auto-generated file is fine — readers are humans, not agents calling your site as an API.
+
+**Override paths** (per [mintlify.com/docs/ai/skillmd](https://www.mintlify.com/docs/ai/skillmd)):
+
+- Single skill: `skill.md` at the repo root.
+- Multiple skills: `.mintlify/skills/<category>/SKILL.md`. Mintlify resolves symlinks at deploy, so `.mintlify/skills/` can symlink into a separate skill repo.
+- Both can coexist. Deleting all custom skill files reverts to auto-generation.
+
+**Required frontmatter** on a custom override file: `name`, `description`, `license`, `compatibility`, `metadata`, plus optional `allowed-tools`. Defer to the live spec for current required fields before authoring.
+
+**Reverse-proxy note for non-default deployments:** if the site is fronted by a custom reverse proxy (e.g. `/docs` subpath), forward `/skill.md`, `/.well-known/skills/*`, and `/.well-known/agent-skills/*` so discovery works.
 
 ### Phase 5 — Initial CI
 

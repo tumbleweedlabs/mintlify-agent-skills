@@ -6,5 +6,8 @@ node_modules/
 .vscode/
 .idea/
 
+# Claude Code project state — local only
+.claude/
+
 # Planning material — kept locally, never published
 HANDOFF.md
