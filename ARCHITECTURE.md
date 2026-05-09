@@ -45,7 +45,7 @@ Initial templates:
 - `patterns/internal-wiki.md` — Anchors; lighter on landing-page polish; search-first.
 - `patterns/multi-product.md` — `products` at root; per-product tabs underneath.
 
-If a contributor finds themselves about to add learning-site flavor to `design/SKILL.md`, the answer is no — that's what `patterns/learning-site.md` is for.
+If a contributor finds themselves about to add learning-site flavor to `skills/design/SKILL.md`, the answer is no — that's what `patterns/learning-site.md` is for.
 
 ### How the agent picks a pattern
 
@@ -55,16 +55,16 @@ In `design`'s Phase 2 ("Frame the design problem"), the agent considers `pattern
 
 Vendor sparingly and with credit:
 
-- **Upstream `mintlify` skill writing standards** (`github.com/mintlify/docs/blob/main/skill.md`) — vendored into `write/SKILL.md` with a credit line and a link back. Vendored because the writing standards are stable, prescriptive, and hot-path content the suite needs to apply turn after turn.
-- **Existing `mintlify-design-skill` SKILL.md** — incorporated into `design/SKILL.md` essentially unchanged.
+- **Upstream `mintlify` skill writing standards** (`github.com/mintlify/docs/blob/main/skill.md`) — vendored into `skills/write/SKILL.md` with a credit line and a link back. Vendored because the writing standards are stable, prescriptive, and hot-path content the suite needs to apply turn after turn.
+- **Existing `mintlify-design-skill` SKILL.md** — incorporated into `skills/design/SKILL.md` essentially unchanged.
 
 Do *not* vendor:
 
 - **Live Mintlify docs** at https://mintlify.com/docs — every skill defers to the live source. Reproducing them locally would rot.
 - **`docs.json` schema** at https://mintlify.com/docs.json — referenced as the authoritative schema; never copied.
-- **Mintlify MCP server** at https://mcp.mintlify.com (docs at https://mintlify.com/docs/ai/mintlify-mcp) — pointed at, never inlined. `router/SKILL.md` references it; `create/SKILL.md` documents per-harness install. `write/SKILL.md` and `design/SKILL.md` map their workflow phases to the MCP's `toolkit` (`explore` / `editContent` / `editNavigation` / `editConfig` / `ship`) so an MCP-equipped agent can `checkout`, propose changes, and `save` (open a PR) without leaving the skill workflow.
+- **Mintlify MCP server** at https://mcp.mintlify.com (docs at https://mintlify.com/docs/ai/mintlify-mcp) — pointed at, never inlined. `skills/router/SKILL.md` references it; `skills/create/SKILL.md` documents per-harness install. `skills/write/SKILL.md` and `skills/design/SKILL.md` map their workflow phases to the MCP's `toolkit` (`explore` / `editContent` / `editNavigation` / `editConfig` / `ship`) so an MCP-equipped agent can `checkout`, propose changes, and `save` (open a PR) without leaving the skill workflow.
 
-When upstream `mintlify` updates its writing standards, re-vendor (with a clear "vendored from {commit} on {date}" note in `write/SKILL.md`) rather than silently drift.
+When upstream `mintlify` updates its writing standards, re-vendor (with a clear "vendored from {commit} on {date}" note in `skills/write/SKILL.md`) rather than silently drift.
 
 ## Extending the suite
 

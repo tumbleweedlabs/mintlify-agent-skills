@@ -19,12 +19,12 @@ compatibility:
     - Network access to https://mintlify.com/docs (authoritative reference)
 metadata:
   author: tumbleweedlabs
-  version: "1.0.0"
+  version: "1.1.0"
   suite: mintlify-agent-skills
   authoritative_docs: https://mintlify.com/docs
   components_reference: https://mintlify.com/docs/components
   schema_reference: https://mintlify.com/docs.json
-  patterns_dir: ../patterns/
+  patterns_dir: ../../patterns/
   scope: information architecture, navigation patterns, landing/hub pages, component selection across pages, OpenAPI integration at the IA level
   non_scope: prose, voice, bootstrap, recurring health, deployment, brand decisions
 ---
@@ -37,7 +37,7 @@ This skill owns design decisions: structure, hierarchy, component choice across 
 
 > Always consult [mintlify.com/docs](https://mintlify.com/docs) and the schema at [mintlify.com/docs.json](https://mintlify.com/docs.json) before making a non-trivial design decision. Favor live documentation over training data. If a [Mintlify MCP server](https://mintlify.com/docs/ai/mintlify-mcp) is available, use its `list_nodes` / `read` / `update_config` / `move_node` tools — they handle session branching automatically.
 
-This skill is **site-type-agnostic.** Site-type variation (API reference, SaaS product docs, learning site, resource library, internal wiki, multi-product) lives in [`patterns/`](../patterns) as opt-in templates. Patterns are **menu items the user picks**, never defaults this skill applies silently.
+This skill is **site-type-agnostic.** Site-type variation (API reference, SaaS product docs, learning site, resource library, internal wiki, multi-product) lives in [`patterns/`](../../patterns) as opt-in templates. Patterns are **menu items the user picks**, never defaults this skill applies silently.
 
 ---
 
@@ -118,7 +118,7 @@ Before touching components, answer these in writing:
 
 If any answer is unknown, ask the user before proposing a structure.
 
-**Surface a `patterns/` candidate if applicable.** If the user is starting fresh or restructuring, and the audience + top-jobs answers point clearly toward one of the templates in [`patterns/`](../patterns), present **1–2 closest candidates as a menu** with one-line summaries. Phrase it as a choice ("Want to start from this template, or design from scratch?") — never apply a pattern silently. If no template fits, design from first principles and note that a new pattern may be worth contributing (link to `CONTRIBUTING.md`).
+**Surface a `patterns/` candidate if applicable.** If the user is starting fresh or restructuring, and the audience + top-jobs answers point clearly toward one of the templates in [`patterns/`](../../patterns), present **1–2 closest candidates as a menu** with one-line summaries. Phrase it as a choice ("Want to start from this template, or design from scratch?") — never apply a pattern silently. If no template fits, design from first principles and note that a new pattern may be worth contributing (link to `CONTRIBUTING.md`).
 
 ### Phase 3 — Design information architecture
 
@@ -334,7 +334,7 @@ If the MCP isn't available, fall back to filesystem operations. The output contr
 
 These are non-negotiable. Violations indicate the skill is being misused.
 
-- **Site-type-agnostic.** No site-type-specific defaults in this skill. Variation lives in [`patterns/`](../patterns) as menu items the user picks.
+- **Site-type-agnostic.** No site-type-specific defaults in this skill. Variation lives in [`patterns/`](../../patterns) as menu items the user picks.
 - **No guessing.** If a `docs.json` field, component, or layout mode is not documented at https://mintlify.com/docs (or in the schema at https://mintlify.com/docs.json), do not include it. Say "I need to verify this against Mintlify docs" and stop.
 - **No silent rewrites.** Output diffs and skeletons. Never overwrite an existing `docs.json` or page wholesale unless the user explicitly asks for a from-scratch rebuild.
 - **No invented components or props.** Mintlify-native components only, with documented props.

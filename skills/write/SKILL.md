@@ -19,7 +19,7 @@ compatibility:
     - Network access to https://mintlify.com/docs (authoritative reference)
 metadata:
   author: tumbleweedlabs
-  version: "1.0.0"
+  version: "1.1.0"
   suite: mintlify-agent-skills
   authoritative_docs: https://mintlify.com/docs
   components_reference: https://mintlify.com/docs/components

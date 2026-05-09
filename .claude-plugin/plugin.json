@@ -1,0 +1,20 @@
+{
+  "name": "mintlify-agent-skills",
+  "version": "1.1.0",
+  "description": "Portable, MIT-licensed agent-skill suite for designing, creating, writing for, and maintaining Mintlify documentation sites. Site-type-agnostic; ships a router, four lifecycle skills (design, write, create, maintain), and six opt-in site-type templates in patterns/.",
+  "author": {
+    "name": "TumbleweedLabs"
+  },
+  "homepage": "https://github.com/TumbleweedLabs/mintlify-agent-skills",
+  "repository": "https://github.com/TumbleweedLabs/mintlify-agent-skills",
+  "license": "MIT",
+  "keywords": [
+    "mintlify",
+    "documentation",
+    "docs",
+    "agent-skills",
+    "site-design",
+    "information-architecture",
+    "skill-suite"
+  ]
+}

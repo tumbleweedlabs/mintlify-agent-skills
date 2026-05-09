@@ -14,11 +14,11 @@ The suite covers the full lifecycle of a Mintlify site without baking in any one
 
 | Skill | Owns | Size |
 |---|---|---:|
-| [`router`](./router/SKILL.md)     | Detects intent, loads the right sibling(s), restates suite-wide guardrails, brokers patterns. Always loaded. | ~12KB |
-| [`design`](./design/SKILL.md)     | Information architecture, navigation, landing/hub pages, component selection. | ~25KB |
-| [`write`](./write/SKILL.md)       | Voice, frontmatter, file conventions, code-example standards. Vendors upstream Mintlify writing standards. | ~24KB |
-| [`create`](./create/SKILL.md)     | Bootstrapping a new site: `mint new`, baseline `docs.json`, CI starter, redirects. | ~19KB |
-| [`maintain`](./maintain/SKILL.md) | Ongoing health: `mint broken-links` / `validate` / `a11y` / `update`, lychee CI, staleness PRs. | ~17KB |
+| [`router`](./skills/router/SKILL.md)     | Detects intent, loads the right sibling(s), restates suite-wide guardrails, brokers patterns. Always loaded. | ~12KB |
+| [`design`](./skills/design/SKILL.md)     | Information architecture, navigation, landing/hub pages, component selection. | ~25KB |
+| [`write`](./skills/write/SKILL.md)       | Voice, frontmatter, file conventions, code-example standards. Vendors upstream Mintlify writing standards. | ~24KB |
+| [`create`](./skills/create/SKILL.md)     | Bootstrapping a new site: `mint new`, baseline `docs.json`, CI starter, redirects. | ~19KB |
+| [`maintain`](./skills/maintain/SKILL.md) | Ongoing health: `mint broken-links` / `validate` / `a11y` / `update`, lychee CI, staleness PRs. | ~17KB |
 
 A sixth, opt-in directory — [`patterns/`](./patterns) — holds six site-type templates (API docs, SaaS product docs, learning site, resource library, internal wiki, multi-product). Each is ~5–6KB. Patterns are *menu items*, never defaults.
 
@@ -40,24 +40,40 @@ See [`ARCHITECTURE.md`](./ARCHITECTURE.md) for the design philosophy and [`CONTR
 
 ## Installation
 
-### Claude Code
+This repo is a [Claude plugin](https://code.claude.com/docs/en/plugins) — `.claude-plugin/plugin.json` at the root, skills under `skills/`. The same plugin format works in Claude Code and Claude Cowork; other harnesses can vendor the `SKILL.md` files directly.
 
-Clone (or vendor) this repo into your project's skills directory:
+### Claude Cowork
 
-```bash
-mkdir -p .claude/skills
-git clone https://github.com/TumbleweedLabs/mintlify-agent-skills.git .claude/skills/mintlify-agent-skills
+```
+/plugin install https://github.com/TumbleweedLabs/mintlify-agent-skills
 ```
 
-Claude Code discovers `SKILL.md` files automatically.
+Skills become available as `mintlify-agent-skills:router`, `mintlify-agent-skills:design`, `mintlify-agent-skills:write`, `mintlify-agent-skills:create`, and `mintlify-agent-skills:maintain`. See [Use plugins in Claude Cowork](https://support.claude.com/en/articles/13837440-use-plugins-in-claude-cowork) for the current command reference.
+
+### Claude Code
+
+If your Claude Code version supports direct plugin install from a Git URL:
+
+```
+/plugin install https://github.com/TumbleweedLabs/mintlify-agent-skills
+```
+
+Otherwise, treat this repo as a single-plugin marketplace:
+
+```
+/plugin marketplace add https://github.com/TumbleweedLabs/mintlify-agent-skills
+/plugin install mintlify-agent-skills
+```
+
+See [Claude Code plugins](https://code.claude.com/docs/en/plugins) for current syntax.
 
 ### Claude Agent SDK
 
-Add the directory to your skills resolver (or pass `router/SKILL.md` as a system-prompt fragment). Companion skills load on demand by directory name; the router does the routing.
+Pass the relevant `SKILL.md` content as a system-prompt fragment. The router (`skills/router/SKILL.md`) is the entry point; companions (`skills/design/SKILL.md`, `skills/write/SKILL.md`, `skills/create/SKILL.md`, `skills/maintain/SKILL.md`) load on demand by name.
 
 ### Cursor / GitHub Copilot / OpenAI Codex / Windsurf
 
-Each supports custom system-prompt or rule files. The simplest install is to concatenate `router/SKILL.md` into your project's rules file (e.g. `.cursor/rules`, `.github/copilot-instructions.md`) and reference companions by file path; the agent will load them when the router signals.
+Each supports custom system-prompt or rule files. The simplest install is to concatenate `skills/router/SKILL.md` into your project's rules file (e.g. `.cursor/rules`, `.github/copilot-instructions.md`) and reference companions by path; the agent loads them when the router signals.
 
 ### Optional: connect the Mintlify MCP
 
@@ -88,7 +104,7 @@ OAuth login completes on first call. The MCP edits your docs — treat the insta
 
 ## Status
 
-**v1.0.0** — initial release. Versioning is [semver](https://semver.org). See [`CONTRIBUTING.md → Versioning`](./CONTRIBUTING.md#versioning) for the per-skill version policy.
+**v1.1.0** — packaged as a Claude plugin (`.claude-plugin/plugin.json` + `skills/<name>/SKILL.md`). Installable via `/plugin install` in Claude Code and Cowork. v1.0.0 was the initial public release with the same content under a flat `<skill>/SKILL.md` layout. Versioning is [semver](https://semver.org); see [`CONTRIBUTING.md → Versioning`](./CONTRIBUTING.md#versioning) for the per-skill version policy.
 
 ## License
 

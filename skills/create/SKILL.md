@@ -21,7 +21,7 @@ compatibility:
     - Network access to https://mintlify.com/docs and the npm registry
 metadata:
   author: tumbleweedlabs
-  version: "1.0.0"
+  version: "1.1.0"
   suite: mintlify-agent-skills
   authoritative_docs: https://mintlify.com/docs
   cli_install_reference: https://mintlify.com/docs/cli/install

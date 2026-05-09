@@ -1,0 +1,34 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "mintlify-agent-skills",
+  "description": "Single-plugin marketplace shipping the TumbleweedLabs mintlify-agent-skills suite (router + design + write + create + maintain + patterns).",
+  "owner": {
+    "name": "TumbleweedLabs"
+  },
+  "plugins": [
+    {
+      "name": "mintlify-agent-skills",
+      "description": "Portable, MIT-licensed agent-skill suite for designing, creating, writing for, and maintaining Mintlify documentation sites. Site-type-agnostic; ships a router, four lifecycle skills, and six opt-in site-type templates.",
+      "author": {
+        "name": "TumbleweedLabs"
+      },
+      "category": "documentation",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/TumbleweedLabs/mintlify-agent-skills.git",
+        "path": "."
+      },
+      "homepage": "https://github.com/TumbleweedLabs/mintlify-agent-skills",
+      "license": "MIT",
+      "keywords": [
+        "mintlify",
+        "documentation",
+        "docs",
+        "agent-skills",
+        "site-design",
+        "information-architecture",
+        "skill-suite"
+      ]
+    }
+  ]
+}

@@ -20,7 +20,7 @@ compatibility:
     - Write access (to a feature branch) for opening maintenance PRs
 metadata:
   author: tumbleweedlabs
-  version: "1.0.0"
+  version: "1.1.0"
   suite: mintlify-agent-skills
   authoritative_docs: https://mintlify.com/docs
   cli_reference: https://mintlify.com/docs/cli/commands

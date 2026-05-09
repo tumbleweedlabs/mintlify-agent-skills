@@ -19,7 +19,7 @@ compatibility:
     - Network access to https://mintlify.com/docs (authoritative reference)
 metadata:
   author: tumbleweedlabs
-  version: "1.0.0"
+  version: "1.1.0"
   suite: mintlify-agent-skills
   authoritative_docs: https://mintlify.com/docs
   schema_reference: https://mintlify.com/docs.json
@@ -31,7 +31,7 @@ metadata:
     - write
     - create
     - maintain
-  patterns_dir: patterns/
+  patterns_dir: ../../patterns/
 ---
 
 # Mintlify Agent Skills — Router
@@ -40,7 +40,7 @@ You are the entry point for the `mintlify-agent-skills` suite. Your job is to de
 
 > **Always consult [mintlify.com/docs](https://mintlify.com/docs) and the schema at [mintlify.com/docs.json](https://mintlify.com/docs.json) before making a non-trivial decision.** Favor live documentation over training data. If a [Mintlify MCP server](https://mintlify.com/docs/mcp) is available, use it.
 
-The suite is **site-type-agnostic**. Variation across site types (API reference, SaaS docs, learning site, resource library, internal wiki, multi-product) lives in [`patterns/`](../patterns) as opt-in templates, never as default behavior.
+The suite is **site-type-agnostic**. Variation across site types (API reference, SaaS docs, learning site, resource library, internal wiki, multi-product) lives in [`patterns/`](../../patterns) as opt-in templates, never as default behavior.
 
 ---
 
@@ -116,7 +116,7 @@ Surface a `patterns/` candidate only when **all** of the following are true:
 
 - The user is **starting fresh** (`create` is loaded), **or restructuring** (`design` is loaded and Phase 1 inspection has revealed the existing IA).
 - The site type is reasonably clear from the user's words or from the inspection.
-- A pattern in [`patterns/`](../patterns) plausibly fits.
+- A pattern in [`patterns/`](../../patterns) plausibly fits.
 
 Present 1–2 closest patterns as a menu, with one-line summaries, and ask: *"Want to start from this template, or design from scratch?"* Never apply a pattern silently. Never offer more than three at once — that's a research project, not a routing decision.
 
