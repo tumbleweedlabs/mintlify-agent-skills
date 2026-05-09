@@ -1,0 +1,10 @@
+.DS_Store
+node_modules/
+.env
+.env.local
+*.log
+.vscode/
+.idea/
+
+# Planning material — kept locally, never published
+HANDOFF.md
