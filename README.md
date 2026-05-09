@@ -94,4 +94,4 @@ OAuth login completes on first call. The MCP edits your docs — treat the insta
 
 [MIT](./LICENSE) © TumbleweedLabs.
 
-The `write` skill vendors writing-standards content from the upstream [`mintlify/docs` skill](https://github.com/mintlify/docs/blob/main/skill.md) with credit and a link back; see [`CONTRIBUTING.md → Vendoring policy`](./CONTRIBUTING.md#vendoring-policy). The `design` skill is descended from [`TumbleweedLabs/mintlify-design-skill`](https://github.com/TumbleweedLabs/mintlify-design-skill), which is archived and superseded by this suite.
+The `write` skill vendors writing-standards content from the upstream [`mintlify/docs` skill](https://github.com/mintlify/docs/blob/main/skill.md) with credit and a link back; see [`CONTRIBUTING.md → Vendoring policy`](./CONTRIBUTING.md#vendoring-policy). The `design` skill is descended from `TumbleweedLabs/mintlify-design-skill`, archived and superseded by this suite.

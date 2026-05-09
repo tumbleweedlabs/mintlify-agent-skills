@@ -81,7 +81,7 @@ If your proposed skill resembles any of the above, the answer is probably "make 
 The suite vendors content from upstream Mintlify in two places:
 
 1. **`write/SKILL.md`** vendors the writing standards from the upstream `mintlify` skill at https://github.com/mintlify/docs/blob/main/skill.md. The vendored sections are *Voice and structure*, *What to avoid*, *Formatting*, *Code examples*, *Page frontmatter*, and *File conventions*. Credit lives both inline (a credit blockquote at the start of *Voice and structure*) and as a *Vendoring notice* footer.
-2. **`design/SKILL.md`** is descended from the standalone [`TumbleweedLabs/mintlify-design-skill`](https://github.com/TumbleweedLabs/mintlify-design-skill) repository, which is archived and superseded by this suite.
+2. **`design/SKILL.md`** is descended from the standalone `TumbleweedLabs/mintlify-design-skill` repository, which has been archived and superseded by this suite.
 
 **Re-vendor on upstream change.** When upstream's writing skill or component reference moves on, refresh the vendored content in `write/SKILL.md` deliberately — don't silently drift. Procedure:
 
